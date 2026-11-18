@@ -1,0 +1,13 @@
+name: 'Delete Draft Releases'
+description: 'Delete draft releases in your repository'
+author: 'step-security'
+runs:
+  using: 'node24'
+  main: 'dist/index.js'
+branding:
+  icon: 'tag'
+  color: 'gray-dark'
+inputs:
+  threshold:
+    description: Only delete drafts older than the set threshold (e.g. '1s', '5d', '1y')
+    required: false
