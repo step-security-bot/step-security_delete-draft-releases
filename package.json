@@ -1,0 +1,41 @@
+{
+  "name": "delete-draft-releases",
+  "version": "3.0.0",
+  "description": "Delete all draft releases",
+  "main": "dist/index.js",
+  "scripts": {
+    "lint": "biome check --write",
+    "test": "biome check && vitest run --coverage",
+    "build": "ncc build src/main.js",
+    "precommit": "npm run build && git add dist/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/step-security/delete-draft-releases.git"
+  },
+  "keywords": [
+    "actions",
+    "node"
+  ],
+  "author": "step-security",
+  "license": "MIT",
+  "type": "module",
+  "prettier": {
+    "trailingComma": "none",
+    "singleQuote": true,
+    "printWidth": 120
+  },
+  "dependencies": {
+    "@actions/core": "^3.0.1",
+    "@actions/github": "^9.1.1",
+    "axios": "^1.21.1",
+    "parse-duration": "^2.1.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.5",
+    "@vercel/ncc": "^0.44.1",
+    "@vitest/coverage-v8": "^4.1.10",
+    "prettier": "^3.9.6",
+    "vitest": "^4.1.10"
+  }
+}

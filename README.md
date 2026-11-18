@@ -1,1 +1,79 @@
-# delete-draft-releases
+[![StepSecurity Maintained Action](https://raw.githubusercontent.com/step-security/maintained-actions-assets/main/assets/maintained-action-banner.png)](https://docs.stepsecurity.io/actions/stepsecurity-maintained-actions)
+
+# GitHub Action - Delete Draft Releases
+
+This GitHub Action (written in JavaScript) wraps the [GitHub Release API](https://developer.github.com/v3/repos/releases/) to allow you to leverage GitHub Actions to delete draft releases.
+
+[![Tests](https://github.com/step-security/delete-draft-releases/workflows/Tests/badge.svg)](https://github.com/step-security/delete-draft-releases/actions?query=workflow%3ATests)
+
+## Usage
+
+### Pre-requisites
+
+Create a workflow `.yml` file in your `.github/workflows` directory. An [example workflow](#example-workflow) is available below. For more information, reference the GitHub Help Documentation for [Creating a workflow file](https://help.github.com/en/articles/configuring-a-workflow#creating-a-workflow-file).
+
+**No outputs are available in this version.**
+
+### Example workflows
+
+On every `push` it deletes any release marked as a draft:
+
+```yaml
+on:
+  push:
+
+name: Delete Draft Releases
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete drafts
+        uses: step-security/delete-draft-releases@v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+To delete drafts older than a certain amount of time you can use the threshold input
+
+```yaml
+on:
+  push:
+
+name: Delete Draft Releases older than 5 days
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete drafts
+        uses: step-security/delete-draft-releases@v3
+        with:
+          threshold: 5d
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+The minimum amount of time is 1 second
+
+[Available units of time](https://github.com/jkroso/parse-duration#readme):
+
+* seconds `s`
+* minutes `m` `min`
+* hours `h` `hr`
+* days `d`
+* weeks `w` `wk`
+* months `mo`
+* years `y` `yr`
+
+## License
+
+The scripts and documentation in this project are released under the [MIT License](LICENSE)

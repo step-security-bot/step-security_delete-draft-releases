@@ -1,0 +1,19 @@
+name: "Tests"
+
+permissions:
+  contents: read
+  pull-requests: read
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - run: npm ci
+      - run: npm test
